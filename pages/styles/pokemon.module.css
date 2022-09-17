@@ -1,0 +1,6 @@
+.pkmn__container {
+  text-transform: capitalize;
+  display: grid;
+  align-items: center;
+  place-content: center;
+}
