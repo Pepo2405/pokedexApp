@@ -1,11 +1,12 @@
 import Cards from "../components/pokemons";
+import {GiPokecog,GiComputerFan} from "react-icons/gi"
 
 export default function Home({ data, types }) {
   console.log(types);
   return (
     <>
       <header className="home-header">
-        <h2 style={{ color: "#eaeaea" }}>ඞ POKEMONES ඞ</h2>
+        <h2 style={{ color: "#eaeaea" }}><GiComputerFan className="tuerca"/> POKEMONES <GiPokecog className="tuerca"/></h2>
         <details>
           <summary>Types:</summary>
           <ul className="botonera-clases">

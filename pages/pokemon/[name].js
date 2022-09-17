@@ -3,7 +3,9 @@ import style from "../styles/pokemon.module.css";
 import Link from "next/link";
 import { MdOutlineCatchingPokemon } from "react-icons/md";
 import { BsFillArrowLeftSquareFill } from "react-icons/bs";
+import { GiThunderBlade } from "react-icons/gi";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Pokemon({ pokemon }) {
   const container = {
@@ -63,10 +65,15 @@ export default function Pokemon({ pokemon }) {
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1, transition: { duration: 0.2 } }}
-              // transition= {{duration:0.2}}
               className="productImage"
             >
-              <img src={pokemon.img} alt="product: ps5 controller image" />
+              <Image
+                src={pokemon.img}
+                alt="product: ps5 controller image"
+                className="amogus"
+                width={228}
+                height={220}
+              />
             </motion.div>
           </div>
         </div>
@@ -97,6 +104,29 @@ export default function Pokemon({ pokemon }) {
             })}
           </motion.div>
         </div>
+        <div className="productSpecifications ">
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="productFeatures skills-cont"
+          >
+            {pokemon.moves.map((move) => {
+              return (
+                <motion.div
+                  variants={itemAnimated}
+                  key={move.move.name}
+                  className="feature"
+                >
+                  <div className={`featureIcon ${pokemon.types[0].type.name}`}>
+                    <GiThunderBlade></GiThunderBlade>
+                  </div>
+                  <div className="featureText">{move.move.name}</div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </div>
       </div>
     </div>
   );
@@ -112,6 +142,7 @@ export async function getServerSideProps(context) {
   pokemon.img = response.sprites.other["official-artwork"].front_default;
   pokemon.types = response.types;
   pokemon.stats = response.stats;
+  pokemon.moves = response.moves.slice(0, 10);
 
   return { props: { pokemon: pokemon } };
 }
