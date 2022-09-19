@@ -79,6 +79,7 @@ export default function Pokemon({ pokemon }) {
         </div>
 
         <div className="productSpecifications">
+          <h2>Stats</h2>
           <motion.div
             className="productFeatures"
             variants={container}
@@ -105,6 +106,8 @@ export default function Pokemon({ pokemon }) {
           </motion.div>
         </div>
         <div className="productSpecifications ">
+        <h2>Skills</h2>
+
           <motion.div
             variants={container}
             initial="hidden"

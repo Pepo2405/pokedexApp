@@ -1,6 +1,4 @@
 .pkmn__container {
   text-transform: capitalize;
-  display: grid;
-  align-items: center;
-  place-content: center;
+  min-height: 100vh;
 }

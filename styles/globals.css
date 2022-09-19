@@ -100,20 +100,37 @@ a {
 a {
   color: #eaeaea;
 }
+#__next{
+  height: 100vh;
+}
 .home-header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
   font-size: 1.6rem;
   font-weight: bolder;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-image: linear-gradient(190deg, #69defb, rgb(255 255 255 / 30%));
+  background-image: linear-gradient(90deg, #007ad1, #363131);
   background-origin: border-box;
   padding: 0.3rem 1rem;
+  width: 100vw;
 }
 .home-header h2 {
   display: flex;
   align-items: center;
   gap: 15px;
+}
+@keyframes details-show {
+  from {
+    opacity:0;
+    transform: var(--details-translate, translateY(-0.5em));
+  }
+}
+
+details[open] > *:not(summary) {
+  animation: details-show 150ms ease-in-out;
 }
 .header {
   display: flex;
@@ -238,8 +255,7 @@ body {
 .wrapper {
   background-image: var(--bg-shape-color);
   overflow: hidden;
-  height: 100%;
-  max-width: 620px;
+  max-width: 768px;
   width: 100vw;
   border-bottom-right-radius: 15px;
   border-bottom-left-radius: 15px;
@@ -371,6 +387,9 @@ h1 {
   grid-row-gap: 16px;
 }
 .productSpecifications .productFeatures .feature {
+  display: flex;
+}
+.pokemon_pkmn__container__vRk3z{
   display: flex;
 }
 

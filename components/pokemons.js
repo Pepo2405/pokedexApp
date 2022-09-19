@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-export default function Cartas({ data }) {
+export default function Cartas({ data, filtro }) {
   const container = {
     hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.2 } },
+    show: { opacity: 1, transition: { staggerChildren: 0.35 } },
   };
   const itemAnimated = {
-    hidden: { x: -100, opacity: 0 },
-    show: { x: 0, opacity: 1 },
+    hidden: { x: -100, opacity: 0,scale:0 },
+    show: { x: 0, opacity: 1,scale:1 },
   };
   return (
     <>
@@ -18,12 +18,7 @@ export default function Cartas({ data }) {
         animate="show"
         className="cards"
       >
-        {/* <ul className="botonera">
-          <li>1</li>
-          <li>2</li>
-          <li>3</li>
-        </ul> */}
-        {data.map((pokemon) => {
+        {filtro.map((pokemon) => {
           return (
             <Link
               key={pokemon.id}

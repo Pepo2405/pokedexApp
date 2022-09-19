@@ -1,29 +1,61 @@
 import Cards from "../components/pokemons";
-import {GiPokecog,GiComputerFan} from "react-icons/gi"
+import { GiPokecog } from "react-icons/gi";
+import { useState } from "react";
 
 export default function Home({ data, types }) {
-  console.log(types);
+  const [filtro, setFiltrar] = useState(data);
+
+  const filtrar = (eltipo) => {
+    setFiltrar(data);
+    if (eltipo === "borrar") {
+      setFiltrar(data);
+    } else {
+      let tipofiltrado = data
+        .filter((pokemon) => pokemon.types.some((tipo) => {
+          console.log("tipo",tipo)
+          return tipo === eltipo}))
+        .map((tem2) => {
+          let nuevosTem = { ...tem2 };
+          return nuevosTem;
+        });
+        console.log(tipofiltrado)
+      setFiltrar(tipofiltrado);
+    }
+  };
+
   return (
     <>
       <header className="home-header">
-        <h2 style={{ color: "#eaeaea" }}><GiComputerFan className="tuerca"/> POKEMONES <GiPokecog className="tuerca"/></h2>
+        <h2 style={{ color: "#eaeaea" }}>
+          <GiPokecog className="tuerca" /> Pokemones{" "}
+          <GiPokecog className="tuerca" />
+        </h2>
         <details>
           <summary>Types:</summary>
           <ul className="botonera-clases">
+            <li className={`boton`} onClick={() => filtrar("borrar")}>Todos</li>
             {types.map((type) => {
-              return <li key={type.name} className={`boton ${type.name}`}>{type.name}</li>;
+              return (
+                <li
+                  key={type.name}
+                  onClick={() => filtrar(type.name)}
+                  className={`boton ${type.name}`}
+                >
+                  {type.name}
+                </li>
+              );
             })}
           </ul>
         </details>
       </header>
-      <Cards data={data} />
+      <Cards data={data} filtro={filtro} />
     </>
   );
 }
 
 export async function getStaticProps(context) {
   let pokemonsRaw = [];
-  for (let i = 1; i <= 42; i++) {
+  for (let i = 1; i <= 102; i++) {
     let data = await fetch(`https://pokeapi.co/api/v2/pokemon/${i}`).then(
       (response) => response.json()
     );
@@ -47,13 +79,3 @@ export async function getStaticProps(context) {
     },
   };
 }
-
-// export async function getStaticProps(context) {
-
-//   return {
-//     props: {
-//       amogus: "ass"
-
-//     },
-//   }
-// }
