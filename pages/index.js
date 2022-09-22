@@ -1,44 +1,74 @@
 import Cards from "../components/pokemons";
 import { GiPokecog } from "react-icons/gi";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Loader } from "../components/loader";
 
 export default function Home({ data, types }) {
   const [filtro, setFiltrar] = useState(data);
+  const [prueba, setPrueba] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-  const filtrar = (eltipo) => {
+  async function perro(tipo = "fire") {
+    let response = await fetch(`https://pokeapi.co/api/v2/type/${tipo}`);
+    let data = await response.json().then((data) => data.pokemon);
+    // setPrueba(data);
+    return data;
+  }
+
+
+  const filtrar2 = async (eltipo) => {
+    setLoading(true);
     setFiltrar(data);
     if (eltipo === "borrar") {
       setFiltrar(data);
+      setLoading(false)
     } else {
-      let tipofiltrado = data
-        .filter((pokemon) => pokemon.types.some((tipo) => {
-          console.log("tipo",tipo)
-          return tipo === eltipo}))
-        .map((tem2) => {
-          let nuevosTem = { ...tem2 };
-          return nuevosTem;
-        });
-        console.log(tipofiltrado)
-      setFiltrar(tipofiltrado);
+      let arregloVacio = [];
+      let arreglodepokimons = await perro(eltipo);
+      for (let pokemon of arreglodepokimons) {
+        let response = await fetch(
+          `https://pokeapi.co/api/v2/pokemon/${pokemon.pokemon.name}`
+        );
+        let data = await response.json();
+        arregloVacio.push(data);
+      }
+      let pokemons_mini = arregloVacio.map((pokemon) => {
+        let foto = "";
+        if (pokemon.sprites.other.dream_world.front_default == null) {
+          foto = pokemon.sprites.front_default;
+        } else {
+          foto = pokemon.sprites.other.dream_world.front_default;
+        }
+        return {
+          id: pokemon.id,
+          name: pokemon.name,
+          sprite: foto,
+          types: pokemon.types.map((item) => item.type.name),
+        };
+      });
+      setFiltrar(pokemons_mini);
+      setLoading(false);
     }
   };
 
   return (
     <>
       <header className="home-header">
-        <h2 style={{ color: "#eaeaea" }}>
+        <h2 style={{ color: "#eaeaea" }} onClick={() => perro()}>
           <GiPokecog className="tuerca" /> Pokemones{" "}
           <GiPokecog className="tuerca" />
         </h2>
         <details>
           <summary>Types:</summary>
           <ul className="botonera-clases">
-            <li className={`boton`} onClick={() => filtrar("borrar")}>Todos</li>
+            <li className={`boton`} onClick={() => filtrar2("borrar")}>
+              Todos
+            </li>
             {types.map((type) => {
               return (
                 <li
                   key={type.name}
-                  onClick={() => filtrar(type.name)}
+                  onClick={() => filtrar2(type.name)}
                   className={`boton ${type.name}`}
                 >
                   {type.name}
@@ -48,7 +78,7 @@ export default function Home({ data, types }) {
           </ul>
         </details>
       </header>
-      <Cards data={data} filtro={filtro} />
+      {loading ? <Loader/>:<Cards data={data} filtro={filtro} />}{" "}
     </>
   );
 }
