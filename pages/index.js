@@ -101,7 +101,7 @@ export async function getStaticProps(context) {
   });
   let data_types = await fetch("https://pokeapi.co/api/v2/type/")
     .then((response) => response.json())
-    .then((data) => data.results);
+    .then((data) => data.results).then(data => data.filter(type => type.name !== "shadow" && type.name !== "unknown"));
   return {
     props: {
       data: pokemons_mini,
