@@ -66,13 +66,18 @@ export default function Pokemon({ pokemon }) {
               initial={{ scale: 0 }}
               animate={{ scale: 1, transition: { duration: 0.2 } }}
               className="productImage"
+              drag
+              dragElastic={0.7}
+              dragConstraints={{left:0,top:0,right:0,bottom:0}}
             >
               <Image
+              
                 src={pokemon.img}
                 alt="product: ps5 controller image"
                 className="amogus"
                 width={228}
                 height={220}
+                style={{userSelector:"none"}}
               />
             </motion.div>
           </div>
