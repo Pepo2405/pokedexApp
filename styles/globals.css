@@ -209,7 +209,8 @@ a {
 .errorImg{
   width: 80vw;
   height: 40vh;
-  background: url("https://pbs.twimg.com/media/D5j8smjWAAAQikp.png");
+  background: no-repeat center url("https://pbs.twimg.com/media/D5j8smjWAAAQikp.png");
+
 }
 
 

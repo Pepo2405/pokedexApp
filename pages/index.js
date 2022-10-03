@@ -10,10 +10,19 @@ export default function Home({ data, types }) {
   const [loading, setLoading] = useState(false);
   const [error,setError] = useState(false);
 
+
+
+  const restore = ()=>{
+    console.log("click")
+    setLoading(true);
+    setFiltrar(data);
+    setError(false);
+    setLoading(false);
+
+  }
   async function filtrar(tipo = "fire") {
     let response = await fetch(`https://pokeapi.co/api/v2/type/${tipo}`);
     let data = await response.json().then((data) => data.pokemon);
-    // setPrueba(data);
     return data;
   }
   const prueba = async (e, input) => {
@@ -110,7 +119,7 @@ export default function Home({ data, types }) {
         </details>
         <Searcher handleSubmit={prueba} />
       </header>
-      {loading ? <Loader /> : error ? <NotFound/>: <Cards data={data} filtro={filtro} />}{" "}
+      {loading ? <Loader /> : error ? <NotFound click={restore}/>: <Cards data={data} filtro={filtro} />}{" "}
     </>
   );
 }
