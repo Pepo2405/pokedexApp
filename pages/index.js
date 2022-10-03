@@ -64,6 +64,7 @@ export default function Home({ data, types }) {
     setFiltrar(data);
     if (eltipo === "borrar") {
       setFiltrar(data);
+      setError(false);
       setLoading(false);
     } else {
       let arregloVacio = [];
@@ -90,6 +91,7 @@ export default function Home({ data, types }) {
         };
       });
       setFiltrar(pokemons_mini);
+      setError(false)
       setLoading(false);
     }
   };
