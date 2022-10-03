@@ -1,6 +1,6 @@
 import Cards from "../components/pokemons";
 import { GiPokecog } from "react-icons/gi";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Loader } from "../components/loader";
 import { Searcher } from "../components/searcher";
 import { NotFound } from "../components/404";
@@ -8,18 +8,14 @@ import { NotFound } from "../components/404";
 export default function Home({ data, types }) {
   const [filtro, setFiltrar] = useState(data);
   const [loading, setLoading] = useState(false);
-  const [error,setError] = useState(false);
+  const [error, setError] = useState(false);
 
-
-
-  const restore = ()=>{
-    console.log("click")
+  const restore = () => {
     setLoading(true);
     setFiltrar(data);
     setError(false);
     setLoading(false);
-
-  }
+  };
   async function filtrar(tipo = "fire") {
     let response = await fetch(`https://pokeapi.co/api/v2/type/${tipo}`);
     let data = await response.json().then((data) => data.pokemon);
@@ -32,16 +28,23 @@ export default function Home({ data, types }) {
     } else {
       setLoading(true);
       let pokemonsRaw = [];
-      let data = await fetch(`https://pokeapi.co/api/v2/pokemon/${input}`)
-        .then((response) => response.json())
-        .catch((error) => {
-          console.log("lo cacho")
-          setLoading(false);
+      let response = await fetch(
+        `https://pokeapi.co/api/v2/pokemon/${input}`
+      ).then((response) => {
+        if (response.ok === false) {
           setError(true);
-        });
+          setLoading(false);
+          return response;
+        }
+        setError(false);
+        return response;
+      });
+      let data = await response.json();
+
       pokemonsRaw.push(data);
+     
+
       if (data) {
-        console.log("dataaaaa", data);
         let pokemons_mini = pokemonsRaw.map((pokemon) => {
           return {
             id: pokemon.id,
@@ -94,7 +97,7 @@ export default function Home({ data, types }) {
   return (
     <>
       <header className="home-header">
-        <h2 style={{ color: "#eaeaea" }} onClick={() => filtrar()}>
+        <h2 style={{ color: "#eaeaea" }} onClick={() => restore}>
           <GiPokecog className="tuerca" /> Pokemones{" "}
           <GiPokecog className="tuerca" />
         </h2>
@@ -119,7 +122,13 @@ export default function Home({ data, types }) {
         </details>
         <Searcher handleSubmit={prueba} />
       </header>
-      {loading ? <Loader /> : error ? <NotFound click={restore}/>: <Cards data={data} filtro={filtro} />}{" "}
+      {loading ? (
+        <Loader />
+      ) : error ? (
+        <NotFound click={restore} />
+      ) : (
+        <Cards data={data} filtro={filtro} />
+      )}{" "}
     </>
   );
 }
