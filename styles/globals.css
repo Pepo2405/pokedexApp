@@ -1,12 +1,13 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen,
+  font-family: -apple-system, -system-ui, BlinkMacSystemFont, Segoe UI, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   background-color: #26264d;
   color: #eaeaea;
   scroll-behavior: smooth;
+  background-image: url("https://w.wallha.com/ws/14/yATVkauL.png");
+  background-size: cover;
+  overflow-x: hidden;
 }
 
 a {
@@ -30,26 +31,23 @@ a {
 .card-item {
   flex: 1;
 }
-.card:hover,
-.card:active {
-  scale: 1.02;
-}
+
 .types-container {
   display: flex;
   justify-content: flex-start;
-  gap: 3px;
+  gap: 0.5rem;
   flex-wrap: wrap;
 }
+.card > * {
+  filter: drop-shadow(1px 1px 2px rgb(0, 0, 0));
+}
 .types-container > * {
-  font-size: 17px;
+  font-size: 1.2rem;
   padding: 0.2rem 1rem;
   background-color: rgba(255, 255, 255, 0.593);
-  border-radius: 16px;
+  border-radius: 1rem;
   color: rgb(255, 255, 255);
-  filter: none;
-}
-.card > * {
-  filter: drop-shadow(5px 5px 10px rgb(54, 49, 54));
+  filter: drop-shadow(0px 0px 1px rrgb(0, 0, 0));
 }
 .card img {
   position: absolute;
@@ -64,12 +62,13 @@ a {
   display: flex;
   flex-wrap: wrap;
   list-style: none;
-  gap: 6px;
+  gap: 0.6rem;
 }
 .botonera-clases > * {
   padding: 8px 13px;
   border-radius: 8px;
   box-shadow: 5px 5px 10px 0px #000;
+  background-color: #148aeb;
 }
 .boton:active {
   scale: 0.92;
@@ -78,7 +77,7 @@ a {
 }
 .boton:hover {
   cursor: pointer;
-  filter: brightness(0.85);
+  filter: brightness(1.1);
 }
 
 .card {
@@ -131,20 +130,19 @@ a {
   position: relative;
   max-width: 203px;
   align-items: center;
-
 }
-.buscador input{
-  background-color:#0334c9;
-  padding: 5px 20px 5px  10px;
+.buscador input {
+  background-color: #0334c9;
+  padding: 5px 20px 5px 10px;
 }
 
-
-.search-box{
+.search-box {
   width: fit-content;
   height: fit-content;
   position: relative;
+  margin: 1rem;
 }
-.input-search{
+.input-search {
   height: 50px;
   width: 50px;
   border-style: none;
@@ -153,18 +151,18 @@ a {
   letter-spacing: 2px;
   outline: none;
   border-radius: 25px;
-  transition: all .5s ease-in-out;
+  transition: all 0.5s ease-in-out;
   background-color: #122b96;
   padding-right: 40px;
-  color:#fff;
+  color: #fff;
 }
-.input-search::placeholder{
-  color:rgba(255, 255, 255, 0.9);
+.input-search::placeholder {
+  color: rgba(255, 255, 255, 0.9);
   font-size: 18px;
   letter-spacing: 2px;
   font-weight: 700;
 }
-.btn-search{
+.btn-search {
   width: 48px;
   height: 50px;
   border-style: none;
@@ -174,48 +172,44 @@ a {
   cursor: pointer;
   border-radius: 50%;
   position: absolute;
-  color:#ffffffa8 ;
-  background-color:transparent;
+  color: #ffffffa8;
+  background-color: transparent;
   pointer-events: painted;
   top: 0;
   right: 0;
-  
 }
-.btn-search:focus ~ .input-search{
+.btn-search:focus ~ .input-search {
   width: 300px;
   max-width: 80vw;
   border-radius: 0px;
   background-color: transparent;
-  border-bottom:1px solid rgba(255, 255, 255, 0.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   /* transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2); */
 }
-.input-search:focus{
+.input-search:focus {
   width: 300px;
   max-width: 80vw;
   border-radius: 0px;
   background-color: transparent;
-  border-bottom:1px solid rgba(255,255,255,.5);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   /* transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2); */
 }
 
-
-.error{
+.error {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   flex-direction: column;
 }
-.errorImg{
+.errorImg {
   width: 80vw;
   height: 40vh;
-  background: no-repeat center url("https://pbs.twimg.com/media/D5j8smjWAAAQikp.png");
-
+  background: no-repeat center
+    url("https://pbs.twimg.com/media/D5j8smjWAAAQikp.png");
 }
 
-
-
-.icon{
+.icon {
   position: absolute;
   color: #000;
   right: -0;
@@ -364,11 +358,7 @@ body {
   color: var(--text-color);
 }
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .wrapper {
   background-image: var(--bg-shape-color);
@@ -383,7 +373,27 @@ body {
 .productSpecifications {
   padding: 24px;
 }
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #7176f9 #000000;
+  }
 
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #000000;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #7176f9;
+    border-radius: 9px;
+    border: 1px outset #ffdd00;
+  }
 .actions {
   display: flex;
   justify-content: space-between;

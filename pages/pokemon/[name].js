@@ -119,7 +119,7 @@ export default function Pokemon({ pokemon }) {
             animate="show"
             className="productFeatures skills-cont"
           >
-            {pokemon.moves.map((move) => {
+            {pokemon.moves.slice(0,6).map((move) => {
               return (
                 <motion.div
                   variants={itemAnimated}

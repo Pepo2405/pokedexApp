@@ -7,18 +7,17 @@ function MyApp({ Component, pageProps }) {
   return (
     <AnimatePresence mode="wait">
       <motion.div
-      key={router.route}
+        key={router.route}
         initial="initialState"
         animate="animateState"
         exit="exitState"
-        transition={{duration:0.4}}
+        
+        transition={{ duration: 0.4 }}
         variants={{
-          initialState:{opacity:0,
-          },
-          animateState:{opacity:1,
-          },
-          exitState:{opacity:0,
-          },
+          initialState: { opacity: 0 },
+          animateState: { opacity: 1 },
+          exitState: { opacity: 0 },
+          hover: { scale: 1.1 },
         }}
       >
         <Component {...pageProps} />

@@ -1,9 +1,10 @@
-import Cards from "../components/pokemons";
+import Cards from "../components/Cards";
 import { GiPokecog } from "react-icons/gi";
 import { useState } from "react";
 import { Loader } from "../components/loader";
 import { Searcher } from "../components/searcher";
 import { NotFound } from "../components/404";
+import { motion } from "framer-motion";
 
 export default function Home({ data, types }) {
   const [filtro, setFiltrar] = useState(data);
@@ -42,7 +43,6 @@ export default function Home({ data, types }) {
       let data = await response.json();
 
       pokemonsRaw.push(data);
-     
 
       if (data) {
         let pokemons_mini = pokemonsRaw.map((pokemon) => {
@@ -91,7 +91,7 @@ export default function Home({ data, types }) {
         };
       });
       setFiltrar(pokemons_mini);
-      setError(false)
+      setError(false);
       setLoading(false);
     }
   };
@@ -111,13 +111,13 @@ export default function Home({ data, types }) {
             </li>
             {types.map((type) => {
               return (
-                <li
+                <motion.li
                   key={type.name}
                   onClick={() => filtrar2(type.name)}
                   className={`boton ${type.name}`}
                 >
                   {type.name}
-                </li>
+                </motion.li>
               );
             })}
           </ul>
